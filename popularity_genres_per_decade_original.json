@@ -1,57 +1,72 @@
 [
   {
     "id": 1,
-    "name": "flare"
+    "name": "1970"
   },
   {
     "id": 2,
-    "name": "analytics",
+    "name": "R&B",
     "parent": 1
   },
   {
     "id": 3,
-    "name": "cluster",
+    "name": "Latin",
     "parent": 1
   },
   {
     "id": 4,
-    "name": "AgglomerativeCluster",
-    "parent": 3,
-    "size": 39
+    "name": "Pop",
+    "parent": 1
   },
   {
     "id": 5,
-    "name": "CommunityStructure",
-    "parent": 3,
-    "size": 38
+    "name": "Rock",
+    "parent": 1
   },
   {
     "id": 6,
-    "name": "HierarchicalCluster",
-    "parent": 3,
-    "size": 67
+    "name": "EDM",
+    "parent": 1
   },
   {
     "id": 7,
-    "name": "MergeEdge",
-    "parent": 3,
-    "size": 7
+    "name": "Rap",
+    "parent": 1
   },
   {
     "id": 8,
-    "name": "graph",
-    "parent": 2
+    "name": "edm_1970",
+    "parent": 6,
+    "size" : 24
   },
   {
     "id": 9,
-    "name": "BetweennessCentrality",
-    "parent": 2,
-    "size": 35
+    "name": "latin_1970",
+    "parent": 3,
+    "size": 63
   },
   {
     "id": 10,
-    "name": "New square",
-    "parent": 3,
-    "size": 100
+    "name": "pop_1970",
+    "parent": 4,
+    "size": 60
+  },
+  {
+    "id": 11,
+    "name": "r&b_1970",
+    "parent": 2,
+    "size": 47
+  },
+  {
+    "id": 10,
+    "name": "rap_1970",
+    "parent": 7,
+    "size": 39
+  },
+  {
+    "id": 10,
+    "name": "rock_1970",
+    "parent": 5,
+    "size": 46
   }
 ]
