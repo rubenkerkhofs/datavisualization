@@ -11,7 +11,7 @@
   {
     "id": 3,
     "name": "cluster",
-    "parent": 2
+    "parent": 1
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
   {
     "id": 9,
     "name": "BetweennessCentrality",
-    "parent": 8,
+    "parent": 2,
     "size": 35
   },
   {
