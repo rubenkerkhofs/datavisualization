@@ -1,51 +1,55 @@
 [
   {
-    "id": 1,
-    "name": "flare"
+    "id": 1950,
+    "name": "1950"
   },
   {
-    "id": 2,
-    "name": "analytics",
+    "id": 1960,
+    "name": "1960",
     "parent": 1
   },
   {
+    "id": 1970,
+    "name": "1970"
+  },
+  {
+    "id": 1980,
+    "name": "1980"
+  },
+  {
+    "id": 1990,
+    "name": "1990"
+  },
+  {
+    "id": 2000,
+    "name": "2000"
+  },
+  {
+    "id": 2010,
+    "name": "2010"
+  },
+  {
+    "id": 1,
+    "name": "R&B 1950",
+    "parent": 1950,
+    "size" : 59
+  },
+  {
+    "id": 2,
+    "name": "Rock 1950",
+    "parent": 1950,
+    "size": 37
+  },
+  {
     "id": 3,
-    "name": "cluster",
-    "parent": 2
+    "name": "Latin 1960",
+    "parent": 1960,
+    "size": 26
   },
   {
     "id": 4,
-    "name": "AgglomerativeCluster",
-    "parent": 3,
-    "size": 3938
-  },
-  {
-    "id": 5,
-    "name": "CommunityStructure",
-    "parent": 3,
-    "size": 3812
-  },
-  {
-    "id": 6,
-    "name": "HierarchicalCluster",
-    "parent": 3,
-    "size": 6714
-  },
-  {
-    "id": 7,
-    "name": "MergeEdge",
-    "parent": 3,
-    "size": 743
-  },
-  {
-    "id": 8,
-    "name": "graph",
-    "parent": 2
-  },
-  {
-    "id": 9,
-    "name": "BetweennessCentrality",
-    "parent": 8,
-    "size": 3534
+    "name": "R&B 1960",
+    "parent": 1960,
+    "size": 48
   }
 ]
