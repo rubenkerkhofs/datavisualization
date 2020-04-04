@@ -17,7 +17,7 @@
     "id": 4,
     "name": "AgglomerativeCluster",
     "parent": 3,
-    "size": 3938
+    "size": 39
   },
   {
     "id": 5,
@@ -47,5 +47,11 @@
     "name": "BetweennessCentrality",
     "parent": 8,
     "size": 35
+  },
+  {
+    "id": 10,
+    "name": "New square",
+    "parent": 3,
+    "size": 100
   }
 ]
