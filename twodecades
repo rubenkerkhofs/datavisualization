@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "name": "1970"
+  },
+  {
+    "id": 2,
+    "name": "R&B",
+    "parent": 1
+  },
+  {
+    "id": 3,
+    "name": "Latin",
+    "parent": 1
+  },
+  {
+    "id": 4,
+    "name": "Pop",
+    "parent": 1
+  },
+  {
+    "id": 5,
+    "name": "Rock",
+    "parent": 1
+  },
+  {
+    "id": 6,
+    "name": "EDM",
+    "parent": 1
+  },
+  {
+    "id": 7,
+    "name": "Rap",
+    "parent": 1
+  },
+  {
+    "id": 8,
+    "name": "edm_1970",
+    "parent": 6,
+    "size" : 24
+  },
+  {
+    "id": 9,
+    "name": "latin_1970",
+    "parent": 3,
+    "size": 63
+  },
+  {
+    "id": 10,
+    "name": "pop_1970",
+    "parent": 4,
+    "size": 60
+  },
+  {
+    "id": 11,
+    "name": "r&b_1970",
+    "parent": 2,
+    "size": 47
+  },
+  {
+    "id": 10,
+    "name": "rap_1970",
+    "parent": 7,
+    "size": 39
+  },
+  {
+    "id": 10,
+    "name": "rock_1970",
+    "parent": 5,
+    "size": 46
+  },
+  
+  
+  
+  
+  
+  {
+    "id": 101,
+    "name": "1980"
+  },
+  {
+    "id": 102,
+    "name": "R&B",
+    "parent": 101
+  },
+  {
+    "id": 103,
+    "name": "Latin",
+    "parent": 101
+  },
+  {
+    "id": 104,
+    "name": "Pop",
+    "parent": 101
+  },
+  {
+    "id": 105,
+    "name": "Rock",
+    "parent": 101
+  },
+  {
+    "id": 106,
+    "name": "EDM",
+    "parent": 101
+  },
+  {
+    "id": 107,
+    "name": "Rap",
+    "parent": 101
+  },
+  {
+    "id": 108,
+    "name": "edm_1980",
+    "parent": 106,
+    "size" : 37
+  },
+  {
+    "id": 109,
+    "name": "latin_1980",
+    "parent": 103,
+    "size": 40
+  },
+  {
+    "id": 110,
+    "name": "pop_1980",
+    "parent": 104,
+    "size": 43
+  },
+  {
+    "id": 111,
+    "name": "r&b_1980",
+    "parent": 102,
+    "size": 37
+  },
+  {
+    "id": 112,
+    "name": "rap_1980",
+    "parent": 107,
+    "size": 43
+  },
+  {
+    "id": 113,
+    "name": "rock_1980",
+    "parent": 105,
+    "size": 47
+  }
+]
