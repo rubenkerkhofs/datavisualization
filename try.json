@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "flare"
+  },
+  {
+    "id": 2,
+    "name": "analytics",
+    "parent": 1
+  },
+  {
+    "id": 3,
+    "name": "cluster",
+    "parent": 2
+  },
+  {
+    "id": 4,
+    "name": "AgglomerativeCluster",
+    "parent": 3,
+    "size": 39
+  },
+  {
+    "id": 5,
+    "name": "CommunityStructure",
+    "parent": 3,
+    "size": 38
+  },
+  {
+    "id": 6,
+    "name": "HierarchicalCluster",
+    "parent": 3,
+    "size": 67
+  },
+  {
+    "id": 7,
+    "name": "MergeEdge",
+    "parent": 3,
+    "size": 7
+  },
+  {
+    "id": 8,
+    "name": "graph",
+    "parent": 2
+  },
+  {
+    "id": 9,
+    "name": "BetweennessCentrality",
+    "parent": 8,
+    "size": 35
+  },
+  {
+    "id": 10,
+    "name": "New square",
+    "parent": 3,
+    "size": 100
+  }
+]
