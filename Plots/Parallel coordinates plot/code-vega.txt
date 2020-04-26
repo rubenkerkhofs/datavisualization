@@ -10,7 +10,7 @@
     {"name": "decade_store"},
     {
       "name": "source_0",
-      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7DKZJHITRPZGB56Q5C6UXGB2",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7FDL4JIQIG5HOXEXDK6UXII6",
       "format": {"type": "json"},
       "transform": [
         {
@@ -138,10 +138,11 @@
       ]
     },
     {
-      "name": "Genre", "value": "rap",
+      "name": "Genre", "value": "All genres",
       "bind": {
         "input": "select",
         "options": [
+          "All genres",
           "rap",
           "r&b",
           "pop",
@@ -153,10 +154,11 @@
       }
     },
     {
-      "name": "Decade", "value": 2010,
+      "name": "Decade", "value": "All decades",
       "bind": {
         "input": "select",
         "options": [
+          "All decades",
           1950,
           1960,
           1970,
@@ -212,13 +214,17 @@
           "from": {"data": "faceted_path_layer_1_main"},
           "encode": {
             "update": {
-              "stroke": {"value": "#51a0d5"},
+              "stroke":  [{
+                  "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
+                  "value": "#51a0d5"
+                },
+                {"value": "#51a0d5"}],
               "opacity": [
                 {
-                  "test": "(Decade == datum.decade) && (Genre == datum.playlist_genre)",
-                  "value": 1
+                  "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
+                  "value": 0.5
                 },
-                {"value": 0.1}
+                {"value": 0.025}
               ],
               "strokeWidth": {"value": 1},
               "tooltip": {
@@ -369,58 +375,5 @@
       "labelBaseline": "top",
       "zindex": 1
     }
-  ],
-  "legends": [
-    {
-      "stroke": "color",
-      "symbolType": "stroke",
-      "title": "decade",
-      "encode": {
-        "labels": {
-          "name": "decade_legend_labels",
-          "interactive": true,
-          "update": {
-            "opacity": [
-              {
-                "test": "(!length(data(\"decade_store\")) || (decade[\"decade\"] && indexof(decade[\"decade\"], datum.value) >= 0))",
-                "value": 1
-              },
-              {"value": 0.35}
-            ]
-          }
-        },
-        "symbols": {
-          "name": "decade_legend_symbols",
-          "interactive": true,
-          "update": {
-            "opacity": [
-              {
-                "test": "(!length(data(\"decade_store\")) || (decade[\"decade\"] && indexof(decade[\"decade\"], datum.value) >= 0))",
-                "value": 0.5
-              },
-              {"value": 0.35}
-            ]
-          }
-        },
-        "entries": {
-          "name": "decade_legend_entries",
-          "interactive": true,
-          "update": {"fill": {"value": "transparent"}}
-        }
-      }
-    }
-  ],
-  "config": {
-    "style": {
-      "label": {"baseline": "middle", "align": "right", "dx": -5},
-      "tick": {"orient": "horizontal"},
-      "cell": {"stroke": null}
-    },
-    "axisX": {
-      "domain": false,
-      "labelAngle": 0,
-      "tickColor": "#ccc",
-      "title": null
-    }
-  }
+  ]
 }
