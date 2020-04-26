@@ -1,0 +1,335 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Parallel coordinates plot showing 7 dimensions of automobile statistics.",
+  "width": 1000,
+  "height": 400,
+  "padding": 5,
+
+  "config": {
+    "axisY": {
+      "titleX": -2,
+      "titleY": 410,
+      "titleAngle": 0,
+      "titleAlign": "right",
+      "titleBaseline": "top"
+    }
+  },
+  "signals": [
+        {
+      "name": "clear", "value": true,
+      "on": [
+        {
+          "events": "mouseup[!event.item]",
+          "update": "true",
+          "force": true
+        }
+      ]
+    },
+
+    {
+      "name": "shift", "value": false,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "event.shiftKey",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "clicked", "value": null,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "{value: datum.value}",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "brush", "value": 0,
+      "on": [
+        {
+          "events": {"signal": "clear"},
+          "update": "clear ? [0, 0] : brush"
+        },
+        {
+          "events": "@xaxis:mousedown",
+          "update": "[x(), x()]"
+        },
+        {
+          "events": "[@xaxis:mousedown, window:mouseup] > window:mousemove!",
+          "update": "[brush[0], clamp(x(), 0, width)]"
+        },
+        {
+          "events": {"signal": "delta"},
+          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)"
+        }
+      ]
+    },
+    {
+      "name": "anchor", "value": null,
+      "on": [{"events": "@brush:mousedown", "update": "slice(brush)"}]
+    },
+    {
+      "name": "xdown", "value": 0,
+      "on": [{"events": "@brush:mousedown", "update": "x()"}]
+    },
+    {
+      "name": "delta", "value": 0,
+      "on": [
+        {
+          "events": "[@brush:mousedown, window:mouseup] > window:mousemove!",
+          "update": "x() - xdown"
+        }
+      ]
+    },
+    {
+      "name": "domain",
+      "on": [
+        {
+          "events": {"signal": "brush"},
+          "update": "span(brush) ? invert('x', brush) : null"
+        }
+      ]
+    }
+  ],
+
+  "data": [
+    {
+      "name": "cars",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7BNRGS67MHQO6THONC6UWIF4",
+      "format": {
+        "type": "json",
+        "parse": {"decade": "date:%Y-%m-%d"}
+      },
+      "transform": [
+        { "type": "formula", "as": "Decade",
+          "expr": "isNumber(datum.deacde) ? datum.decade : year(datum.decade)" }
+      ]
+    },
+
+    {
+      "name": "selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!shift", "remove": true},
+        {"trigger": "!shift && clicked", "insert": "clicked"},
+        {"trigger": "shift && clicked", "toggle": "clicked"}
+      ]
+    }  ,
+
+    {
+      "name": "fields",
+      "values": [
+        "Danceability",
+        "Energy",
+        "Key",
+        "Loudness",
+        "Speechiness",
+        "Acousticness",
+        "Instrumentalness",
+        "Liveness",
+        "Valence",
+        "Tempo",
+        "Decade"
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "ord", "type": "point",
+      "range": "width", "round": true,
+      "domain": {"data": "fields", "field": "data"}
+    },
+    {
+      "name": "Danceability", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Danceability"}
+    },
+    {
+      "name": "Energy", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Energy"}
+    },
+    {
+      "name": "Key", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Key"}
+    },
+    {
+      "name": "Loudness", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Loudness"}
+    },
+    {
+      "name": "Speechiness", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Speechiness"}
+    },
+    {
+      "name": "Acousticness", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Acousticness"}
+    },
+    {
+      "name": "Instrumentalness", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Instrumentalness"}
+    },
+    {
+      "name": "Liveness", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Liveness"}
+    },
+    {
+      "name": "Valence", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Valence"}
+    },
+    {
+      "name": "Tempo", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Tempo"}
+    },
+    {
+      "name": "Decade", "type": "linear",
+      "range": "height", "zero": false, "nice": true,
+      "domain": {"data": "cars", "field": "Decade"}
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "cars", "field": "Decade"},
+      "range": {"scheme": "category20"}
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Loudness", "title": "Loudness",
+      "offset": {"scale": "ord", "value": "Loudness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Danceability", "title": "Danceability",
+      "offset": {"scale": "ord", "value": "Danceability", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Energy", "title": "Energy",
+      "offset": {"scale": "ord", "value": "Energy", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Key", "title": "Key",
+      "offset": {"scale": "ord", "value": "Key", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Loudness", "title": "Loudness",
+      "offset": {"scale": "ord", "value": "Loudness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Speechiness", "title": "Speechiness",
+      "offset": {"scale": "ord", "value": "Speechiness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Acousticness", "title": "Acousticness",
+      "offset": {"scale": "ord", "value": "Acousticness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Instrumentalness", "title": "Instrumentalness",
+      "offset": {"scale": "ord", "value": "Instrumentalness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Liveness", "title": "Liveness",
+      "offset": {"scale": "ord", "value": "Liveness", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Valence", "title": "Valence",
+      "offset": {"scale": "ord", "value": "Valence", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Tempo", "title": "Tempo",
+      "offset": {"scale": "ord", "value": "Tempo", "mult": -1}
+    },
+    {
+      "orient": "left", "zindex": 1,
+      "scale": "Decade", "title": "Decade",
+      "offset": {"scale": "ord", "value": "Decade", "mult": -1}
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "group",
+      "from": {"data": "cars"},
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "fields"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "ord", "field": "data"},
+              "y": {
+                "scale": {"datum": "data"},
+                "field": {"parent": {"datum": "data"}}
+              },
+              "strokeOpacity": {"value": 0.2},
+              "strokeWidth": {"value": 1},
+              "stroke" : {"value": "steelblue"}
+            },
+            "update": {
+            "opacity": [
+              {"test": "!length(data('selected')) || indata('selected', 'decade', datum.decade)", "value": 1},
+              {"value": 0}
+            ]
+            }
+          }
+
+        }
+      ]
+    }
+  ],
+
+   "legends": [
+    {
+      "stroke": "color",
+      "title": "Decade",
+      "encode": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
+          "update": {
+            "fill": {"value": "transparent"},
+            "strokeWidth": {"value": 2},
+            "opacity": [
+              {"test": "!length(data('selected')) || indata('selected', 'value', datum.value)", "value": 0.7},
+              {"value": 0.15}
+            ],
+            "size": {"value": 64}
+          }
+        },
+        "labels": {
+          "name": "legendLabel",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {"test": "!length(data('selected')) || indata('selected', 'value', datum.value)", "value": 1},
+              {"value": 0.25}
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

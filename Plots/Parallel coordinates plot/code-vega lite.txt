@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "Evolution of music",
+  "data": {
+    "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7BNRGS67MHQO6THONC6UWIF4"
+  },
+  "width": 800,
+  "height": 400,
+  "transform": [
+    {"window": [{"op": "count", "as": "index"}]},
+    {"fold": ["Danceability", "Energy", "Key", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo"]},
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "value", "as": "min"},
+        {"op": "max", "field": "value", "as": "max"}
+      ],
+      "groupby": ["key"]
+    },
+    {
+      "calculate": "(datum.value - datum.min) / (datum.max-datum.min)",
+      "as": "norm_val"
+    },
+    {
+      "calculate": "(datum.min + datum.max) / 2",
+      "as": "mid"
+    }
+  ],
+  "layer": [{
+    "mark": {"type": "rule", "color": "#CCC"},
+    "encoding": {
+      "detail": {"aggregate": "count", "type": "quantitative"},
+      "x": {"type": "nominal", "field": "key"}
+    }
+  }, {
+    "mark": "line",
+    "selection": {
+    "decade": {
+      "type": "multi", "fields": ["decade"], "bind": "legend"
+    }
+  },
+    "encoding": {
+      "color": {"type": "nominal", "field": "decade"},
+      "strokeWidth": {"value": 1},
+      "detail": {"type": "nominal", "field": "index"},
+      "opacity": {
+      "condition": {"selection": "decade", "value": 0.5},
+      "value": 0.05
+    },
+      "x": {"type": "nominal", "field": "key"},
+      "y": {"type": "quantitative", "field": "norm_val", "axis": null},
+      "tooltip": [{
+        "type": "quantitative",
+        "field": "Danceability"
+      }, {
+        "type": "quantitative",
+        "field": "Energy"
+      }, {
+        "type": "quantitative",
+        "field": "Key"
+      }, {
+        "type": "quantitative",
+        "field": "Loudness"
+      }]
+    }
+  }, {
+    "encoding": {
+      "x": {"type": "nominal", "field": "key"},
+      "y": {"value": 0}
+    },
+    "layer": [{
+      "mark": {"type": "text", "style": "label"},
+      "encoding": {
+        "text": {"aggregate": "max", "field": "max", "type": "quantitative"}
+      }
+    }, {
+      "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+    }]
+  }, {
+    "encoding": {
+      "x": {"type": "nominal", "field": "key"},
+      "y": {"value": 150}
+    },
+    "layer": [{
+      "mark": {"type": "text", "style": "label"},
+      "encoding": {
+        "text": {"aggregate": "min", "field": "mid", "type": "quantitative"}
+      }
+    }, {
+      "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+    }]
+  }, {
+    "encoding": {
+      "x": {"type": "nominal", "field": "key"},
+      "y": {"value": 300}
+    },
+    "layer": [{
+      "mark": {"type": "text", "style": "label"},
+      "encoding": {
+        "text": {"aggregate": "min", "field": "min", "type": "quantitative"}
+      }
+    }, {
+      "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+    }]
+  }],
+  "config": {
+    "axisX": {"domain": false, "labelAngle": 0, "tickColor": "#ccc", "title": null},
+    "view": {"stroke": null},
+    "style": {
+      "label": {"baseline": "middle", "align": "right", "dx": -5},
+      "tick": {"orient": "horizontal"}
+    }
+  }
+}
