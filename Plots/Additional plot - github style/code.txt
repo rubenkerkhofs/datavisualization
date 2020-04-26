@@ -1,0 +1,13 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20addition/danceability_per_season.json?token=AKSFM7GIVK6L5UJOTMJKY3C6UWKQY"},
+  "mark": {"type": "rect", "tooltip": true},
+  "encoding": {
+    "y": {"field": "season", "type": "nominal"},
+    "x": {"field": "track_album_release_year", "type": "ordinal"},
+    "color": {"aggregate": "mean", "field": "danc", "type": "quantitative"}
+  },
+  "config": {
+    "axis": {"grid": true, "tickBand": "extent"}
+  }
+}
