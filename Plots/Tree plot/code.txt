@@ -9,7 +9,7 @@
   "data": [
     {
       "name": "tree",
-      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20tree%20plot/data1970.json?token=AKSFM7D52XAI4DZXJYVPVCS6UWJFQ",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20tree%20plot/data1970.json",
       "transform": [
         {
           "type": "stratify",

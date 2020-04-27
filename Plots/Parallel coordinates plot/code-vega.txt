@@ -10,7 +10,7 @@
     {"name": "decade_store"},
     {
       "name": "source_0",
-      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7FDL4JIQIG5HOXEXDK6UXII6",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json",
       "format": {"type": "json"},
       "transform": [
         {

@@ -8,7 +8,7 @@
   "data": [
     {
       "name": "table",
-      "url" : "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20line%20plot%20over%20years/characteristics_per_month.json?token=AKSFM7HXR5CBUUBPLJYUPIC6UWKBW",
+      "url" : "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20line%20plot%20over%20years/characteristics_per_month.json",
       "transform": [
         { "type": "filter", "expr": "datum.c == 'Valence'" }
       ]

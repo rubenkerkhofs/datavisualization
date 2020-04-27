@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/lineplotyears/Data/Sketch%202%20-%20addition/danceability_per_season.json?token=AKSFM7AY422JCEDMHAUKSDS6UXAGE"},
+  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20addition/danceability_per_season.json"},
   "vconcat": [
     {
       "title": "Danceability",
@@ -33,5 +33,4 @@
     }
 
   ]
-}
 }

@@ -3,7 +3,7 @@
   "description": "Stock prices of 5 Tech Companies over Time.",
   "width": 700,
   "height": 200,
-  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/lineplotyears/Data/Sketch%202%20-%20line%20plot%20over%20years/characteristics_per_decade.json?token=AKSFM7EWIRFAQF6NP6EOETS6UWZKA"},
+  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20line%20plot%20over%20years/characteristics_per_decade.json"},
 
   "mark": {
     "type": "line",
