@@ -46,17 +46,22 @@ Although there are many benefits to the amount of detail that can be provided in
 The different sketches shown above have been implemented using vega or vega lite. The code of these sketches and an example image can be found in this repository as well.
 
 ### Sketch 1 - Implementation
- <img src="https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/Tree%20plot.PNG?token=AKSFM7A2MOA3OIPDEVZVA4S6U2BVC" alt="Tree plot implementation" class="center" height="200">
- 
-  <img src="https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Plots/Parallel%20coordinates%20plot/Parallel%20coordinates%20plot%20-%20vega.PNG?token=AKSFM7HQ4ZSZMQVN562SX6S6U2CDW" alt="Parallel coordinates plot implementation" class="center" height="200">
+[Tree plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/Tree%20plot.PNG) - [Code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/code.txt)
+
+[Parallel coordinates plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/Parallel%20coordinates%20plot%20-%20vega.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/code-vega.txt)
+
   
  ### Sketch 2 - Implementation
-  <img src="https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Plots/Line%20plot%20over%20years/plot.PNG?token=AKSFM7DRLAFWG74XUGZJ2O26U2CNQ" alt="Line plot implementation 1" class="center" height="200">
  
-  <img src="https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg?token=AKSFM7BSYSUBFP6V3FK7GQK6U2CPC" alt="Line plot implementation 2" class="center" height="200">
+ [Line plot over years implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/code.txt)
+ 
+ [Line plot over months implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/code.txt)
+ 
   
   ### Sketch 2 - additional implementation
-  <img src="https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Plots/Additional%20plot%20-%20github%20style/plot.PNG?token=AKSFM7E2WE3NAOYH3DGEX5S6U2CT4" alt="Line plot implementation 2" class="center" height="200">
+  
+  [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt)
+  
   
  ### Sketch 3 - Implementation
  TBA
