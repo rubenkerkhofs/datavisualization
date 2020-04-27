@@ -1,335 +1,379 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Parallel coordinates plot showing 7 dimensions of automobile statistics.",
-  "width": 1000,
-  "height": 400,
+  "description": "Evolution of music",
+  "background": "white",
   "padding": 5,
-
-  "config": {
-    "axisY": {
-      "titleX": -2,
-      "titleY": 410,
-      "titleAngle": 0,
-      "titleAlign": "right",
-      "titleBaseline": "top"
-    }
-  },
-  "signals": [
+  "width": 800,
+  "height": 400,
+  "style": "cell",
+  "data": [
+    {"name": "decade_store"},
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/Parallelplot/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7FDL4JIQIG5HOXEXDK6UXII6",
+      "format": {"type": "json"},
+      "transform": [
         {
-      "name": "clear", "value": true,
+          "type": "window",
+          "params": [null],
+          "as": ["index"],
+          "ops": ["count"],
+          "fields": [null],
+          "sort": {"field": [], "order": []}
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "Danceability",
+            "Energy",
+            "Key",
+            "Loudness",
+            "Speechiness",
+            "Acousticness",
+            "Instrumentalness",
+            "Liveness",
+            "Valence",
+            "Tempo"
+          ],
+          "as": ["key", "value"]
+        },
+        {
+          "type": "joinaggregate",
+          "as": ["min", "max"],
+          "ops": ["min", "max"],
+          "fields": ["value", "value"],
+          "groupby": ["key"]
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.value - datum.min) / (datum.max-datum.min)",
+          "as": "norm_val"
+        },
+        {"type": "formula", "expr": "(datum.min + datum.max) / 2", "as": "mid"}
+      ]
+    },
+    {
+      "name": "data_0",
+      "source": "source_0",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["key"],
+          "ops": ["min", "count", "max", "min"],
+          "fields": ["min", null, "max", "mid"],
+          "as": ["min_min", "__count", "max_max", "min_mid"]
+        }
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "name": "unit",
+      "value": {},
+      "on": [
+        {"events": "mousemove", "update": "isTuple(group()) ? group() : unit"}
+      ]
+    },
+    {
+      "name": "decade_decade_legend",
+      "value": null,
       "on": [
         {
-          "events": "mouseup[!event.item]",
-          "update": "true",
+          "events": [
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "decade_legend_symbols"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "decade_legend_labels"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "decade_legend_entries"
+            }
+          ],
+          "update": "datum.value || item().items[0].items[0].datum.value",
+          "force": true
+        },
+        {
+          "events": [{"source": "view", "type": "click"}],
+          "update": "!event.item || !datum ? null : decade_decade_legend",
           "force": true
         }
       ]
     },
+    {
+      "name": "decade",
+      "update": "vlSelectionResolve(\"decade_store\", \"union\", true)"
+    },
+    {
+      "name": "decade_tuple",
+      "update": "decade_decade_legend !== null ? {fields: decade_tuple_fields, values: [decade_decade_legend]} : null"
+    },
+    {
+      "name": "decade_tuple_fields",
+      "value": [{"type": "E", "field": "decade"}]
+    },
+    {
+      "name": "decade_toggle",
+      "value": false,
+      "on": [
+        {
+          "events": {"merge": [{"source": "view", "type": "click"}]},
+          "update": "event.shiftKey"
+        }
+      ]
+    },
+    {
+      "name": "decade_modify",
+      "on": [
+        {
+          "events": {"signal": "decade_tuple"},
+          "update": "modify(\"decade_store\", decade_toggle ? null : decade_tuple, decade_toggle ? null : true, decade_toggle ? decade_tuple : null)"
+        }
+      ]
+    },
+    {
+      "name": "Genre", "value": "All genres",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All genres",
+          "rap",
+          "r&b",
+          "pop",
+          "rock",
+          "latin",
+          "edm"
 
-    {
-      "name": "shift", "value": false,
-      "on": [
-        {
-          "events": "@legendSymbol:click, @legendLabel:click",
-          "update": "event.shiftKey",
-          "force":  true
-        }
-      ]
+        ]
+      }
     },
     {
-      "name": "clicked", "value": null,
-      "on": [
-        {
-          "events": "@legendSymbol:click, @legendLabel:click",
-          "update": "{value: datum.value}",
-          "force":  true
-        }
-      ]
-    },
-    {
-      "name": "brush", "value": 0,
-      "on": [
-        {
-          "events": {"signal": "clear"},
-          "update": "clear ? [0, 0] : brush"
-        },
-        {
-          "events": "@xaxis:mousedown",
-          "update": "[x(), x()]"
-        },
-        {
-          "events": "[@xaxis:mousedown, window:mouseup] > window:mousemove!",
-          "update": "[brush[0], clamp(x(), 0, width)]"
-        },
-        {
-          "events": {"signal": "delta"},
-          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)"
-        }
-      ]
-    },
-    {
-      "name": "anchor", "value": null,
-      "on": [{"events": "@brush:mousedown", "update": "slice(brush)"}]
-    },
-    {
-      "name": "xdown", "value": 0,
-      "on": [{"events": "@brush:mousedown", "update": "x()"}]
-    },
-    {
-      "name": "delta", "value": 0,
-      "on": [
-        {
-          "events": "[@brush:mousedown, window:mouseup] > window:mousemove!",
-          "update": "x() - xdown"
-        }
-      ]
-    },
-    {
-      "name": "domain",
-      "on": [
-        {
-          "events": {"signal": "brush"},
-          "update": "span(brush) ? invert('x', brush) : null"
-        }
-      ]
+      "name": "Decade", "value": "All decades",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All decades",
+          1950,
+          1960,
+          1970,
+          1980,
+          1990,
+          2000,
+          2010,
+          2020
+
+        ]
+      }
     }
   ],
-
-  "data": [
+  "marks": [
     {
-      "name": "cars",
-      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%201%20-%20Parallel%20coordinates%20plot/characteristics.json?token=AKSFM7BNRGS67MHQO6THONC6UWIF4",
-      "format": {
-        "type": "json",
-        "parse": {"decade": "date:%Y-%m-%d"}
+      "name": "layer_0_marks",
+      "type": "rule",
+      "style": ["rule"],
+      "interactive": false,
+      "from": {"data": "data_0"},
+      "encode": {
+        "update": {
+          "stroke": {"value": "#CCC"},
+          "x": {"scale": "x", "field": "key", "band": 0.5},
+          "y": {"value": 0},
+          "y2": {"field": {"group": "height"}}
+        }
+      }
+    },
+    {
+      "name": "layer_1_pathgroup",
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "faceted_path_layer_1_main",
+          "data": "source_0",
+          "groupby": ["decade", "index"]
+        }
       },
-      "transform": [
-        { "type": "formula", "as": "Decade",
-          "expr": "isNumber(datum.deacde) ? datum.decade : year(datum.decade)" }
+      "encode": {
+        "update": {
+          "width": {"field": {"group": "width"}},
+          "height": {"field": {"group": "height"}}
+        }
+      },
+      "marks": [
+        {
+          "name": "layer_1_marks",
+          "type": "line",
+          "style": ["line"],
+          "sort": {"field": "datum[\"key\"]"},
+          "interactive": true,
+          "from": {"data": "faceted_path_layer_1_main"},
+          "encode": {
+            "update": {
+              "stroke":  [{
+                  "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
+                  "value": "#51a0d5"
+                },
+                {"value": "#51a0d5"}],
+              "opacity": [
+                {
+                  "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
+                  "value": 0.5
+                },
+                {"value": 0.025}
+              ],
+              "strokeWidth": {"value": 1},
+              "tooltip": {
+                "signal": "{\"Danceability\": format(datum[\"Danceability\"], \"\"), \"Energy\": format(datum[\"Energy\"], \"\"), \"Key\": format(datum[\"Key\"], \"\"), \"Loudness\": format(datum[\"Loudness\"], \"\")}"
+              },
+              "x": {"scale": "x", "field": "key", "band": 0.5},
+              "y": {"scale": "y", "field": "norm_val"},
+              "defined": {
+                "signal": "isValid(datum[\"norm_val\"]) && isFinite(+datum[\"norm_val\"])"
+              }
+            }
+          }
+        }
       ]
     },
-
     {
-      "name": "selected",
-      "on": [
-        {"trigger": "clear", "remove": true},
-        {"trigger": "!shift", "remove": true},
-        {"trigger": "!shift && clicked", "insert": "clicked"},
-        {"trigger": "shift && clicked", "toggle": "clicked"}
-      ]
-    }  ,
-
+      "name": "layer_2_layer_0_marks",
+      "type": "text",
+      "style": ["text", "label"],
+      "interactive": false,
+      "from": {"data": "data_0"},
+      "encode": {
+        "update": {
+          "fill": {"value": "black"},
+          "x": {"scale": "x", "field": "key", "band": 0.5},
+          "y": {"value": 0},
+          "text": {"signal": "format(datum[\"max_max\"], \"\")"}
+        }
+      }
+    },
     {
-      "name": "fields",
-      "values": [
-        "Danceability",
-        "Energy",
-        "Key",
-        "Loudness",
-        "Speechiness",
-        "Acousticness",
-        "Instrumentalness",
-        "Liveness",
-        "Valence",
-        "Tempo",
-        "Decade"
-      ]
+      "name": "layer_2_layer_1_marks",
+      "type": "rect",
+      "style": ["tick", "tick"],
+      "interactive": false,
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "opacity": {"value": 0.7},
+          "fill": {"value": "#ccc"},
+          "xc": {"scale": "x", "field": "key", "band": 0.5},
+          "yc": {"value": 0},
+          "width": {"value": 8},
+          "height": {"value": 1}
+        }
+      }
+    },
+    {
+      "name": "layer_3_layer_0_marks",
+      "type": "text",
+      "style": ["text", "label"],
+      "interactive": false,
+      "from": {"data": "data_0"},
+      "encode": {
+        "update": {
+          "fill": {"value": "black"},
+          "x": {"scale": "x", "field": "key", "band": 0.5},
+          "y": {"value": 150},
+          "text": {"signal": "format(datum[\"min_mid\"], \"\")"}
+        }
+      }
+    },
+    {
+      "name": "layer_3_layer_1_marks",
+      "type": "rect",
+      "style": ["tick", "tick"],
+      "interactive": false,
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "opacity": {"value": 0.7},
+          "fill": {"value": "#ccc"},
+          "xc": {"scale": "x", "field": "key", "band": 0.5},
+          "yc": {"value": 150},
+          "width": {"value": 8},
+          "height": {"value": 1}
+        }
+      }
+    },
+    {
+      "name": "layer_4_layer_0_marks",
+      "type": "text",
+      "style": ["text", "label"],
+      "interactive": false,
+      "from": {"data": "data_0"},
+      "encode": {
+        "update": {
+          "fill": {"value": "black"},
+          "x": {"scale": "x", "field": "key", "band": 0.5},
+          "y": {"value": 300},
+          "text": {"signal": "format(datum[\"min_min\"], \"\")"}
+        }
+      }
+    },
+    {
+      "name": "layer_4_layer_1_marks",
+      "type": "rect",
+      "style": ["tick", "tick"],
+      "interactive": false,
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "opacity": {"value": 0.7},
+          "fill": {"value": "#ccc"},
+          "xc": {"scale": "x", "field": "key", "band": 0.5},
+          "yc": {"value": 300},
+          "width": {"value": 8},
+          "height": {"value": 1}
+        }
+      }
     }
   ],
-
   "scales": [
     {
-      "name": "ord", "type": "point",
-      "range": "width", "round": true,
-      "domain": {"data": "fields", "field": "data"}
+      "name": "x",
+      "type": "band",
+      "domain": {
+        "fields": [
+          {"data": "data_0", "field": "key"},
+          {"data": "source_0", "field": "key"}
+        ],
+        "sort": true
+      },
+      "range": [0, {"signal": "width"}],
+      "paddingInner": 0,
+      "paddingOuter": 0
     },
     {
-      "name": "Danceability", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Danceability"}
-    },
-    {
-      "name": "Energy", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Energy"}
-    },
-    {
-      "name": "Key", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Key"}
-    },
-    {
-      "name": "Loudness", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Loudness"}
-    },
-    {
-      "name": "Speechiness", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Speechiness"}
-    },
-    {
-      "name": "Acousticness", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Acousticness"}
-    },
-    {
-      "name": "Instrumentalness", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Instrumentalness"}
-    },
-    {
-      "name": "Liveness", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Liveness"}
-    },
-    {
-      "name": "Valence", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Valence"}
-    },
-    {
-      "name": "Tempo", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Tempo"}
-    },
-    {
-      "name": "Decade", "type": "linear",
-      "range": "height", "zero": false, "nice": true,
-      "domain": {"data": "cars", "field": "Decade"}
+      "name": "y",
+      "type": "linear",
+      "domain": {"data": "source_0", "field": "norm_val"},
+      "range": [{"signal": "height"}, 0],
+      "nice": true,
+      "zero": true
     },
     {
       "name": "color",
       "type": "ordinal",
-      "domain": {"data": "cars", "field": "Decade"},
-      "range": {"scheme": "category20"}
+      "domain": {"data": "source_0", "field": "decade", "sort": true},
+      "range": {"scheme": "blues"}
     }
   ],
-
   "axes": [
     {
-      "orient": "left", "zindex": 1,
-      "scale": "Loudness", "title": "Loudness",
-      "offset": {"scale": "ord", "value": "Loudness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Danceability", "title": "Danceability",
-      "offset": {"scale": "ord", "value": "Danceability", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Energy", "title": "Energy",
-      "offset": {"scale": "ord", "value": "Energy", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Key", "title": "Key",
-      "offset": {"scale": "ord", "value": "Key", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Loudness", "title": "Loudness",
-      "offset": {"scale": "ord", "value": "Loudness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Speechiness", "title": "Speechiness",
-      "offset": {"scale": "ord", "value": "Speechiness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Acousticness", "title": "Acousticness",
-      "offset": {"scale": "ord", "value": "Acousticness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Instrumentalness", "title": "Instrumentalness",
-      "offset": {"scale": "ord", "value": "Instrumentalness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Liveness", "title": "Liveness",
-      "offset": {"scale": "ord", "value": "Liveness", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Valence", "title": "Valence",
-      "offset": {"scale": "ord", "value": "Valence", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Tempo", "title": "Tempo",
-      "offset": {"scale": "ord", "value": "Tempo", "mult": -1}
-    },
-    {
-      "orient": "left", "zindex": 1,
-      "scale": "Decade", "title": "Decade",
-      "offset": {"scale": "ord", "value": "Decade", "mult": -1}
-    }
-  ],
-
-  "marks": [
-    {
-      "type": "group",
-      "from": {"data": "cars"},
-      "marks": [
-        {
-          "type": "line",
-          "from": {"data": "fields"},
-          "encode": {
-            "enter": {
-              "x": {"scale": "ord", "field": "data"},
-              "y": {
-                "scale": {"datum": "data"},
-                "field": {"parent": {"datum": "data"}}
-              },
-              "strokeOpacity": {"value": 0.2},
-              "strokeWidth": {"value": 1},
-              "stroke" : {"value": "steelblue"}
-            },
-            "update": {
-            "opacity": [
-              {"test": "!length(data('selected')) || indata('selected', 'decade', datum.decade)", "value": 1},
-              {"value": 0}
-            ]
-            }
-          }
-
-        }
-      ]
-    }
-  ],
-
-   "legends": [
-    {
-      "stroke": "color",
-      "title": "Decade",
-      "encode": {
-        "symbols": {
-          "name": "legendSymbol",
-          "interactive": true,
-          "update": {
-            "fill": {"value": "transparent"},
-            "strokeWidth": {"value": 2},
-            "opacity": [
-              {"test": "!length(data('selected')) || indata('selected', 'value', datum.value)", "value": 0.7},
-              {"value": 0.15}
-            ],
-            "size": {"value": 64}
-          }
-        },
-        "labels": {
-          "name": "legendLabel",
-          "interactive": true,
-          "update": {
-            "opacity": [
-              {"test": "!length(data('selected')) || indata('selected', 'value', datum.value)", "value": 1},
-              {"value": 0.25}
-            ]
-          }
-        }
-      }
+      "scale": "x",
+      "orient": "bottom",
+      "grid": false,
+      "labelBaseline": "top",
+      "zindex": 1
     }
   ]
 }
