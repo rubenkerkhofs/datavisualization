@@ -46,21 +46,21 @@ Although there are many benefits to the amount of detail that can be provided in
 The different sketches shown above have been implemented using vega or vega lite. The code of these sketches and an example image can be found in this repository as well.
 
 ### Sketch 1 - Implementation
-[Tree plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/Tree%20plot.PNG) - [Code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/code.txt)
+[Tree plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/Tree%20plot.PNG) - [Code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Tree%20plot/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/0623829646a24c3e455ba31625560598)
 
-[Parallel coordinates plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/Parallel%20coordinates%20plot%20-%20vega.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/code-vega.txt)
+[Parallel coordinates plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/Parallel%20coordinates%20plot%20-%20vega.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/code-vega.txt) - [gist](https://gist.github.com/rubenkerkhofs/4d1b8337ea0fe31ca0f5407654918321)
 
   
  ### Sketch 2 - Implementation
  
- [Line plot over years implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/code.txt)
+ [Line plot over years implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/bd03982f456d88327672535869b9b757)
  
- [Line plot over months implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/code.txt)
+ [Line plot over months implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/465ab4c5dd873f3bb7752a03d096618f)
  
   
   ### Sketch 2 - additional implementation
   
-  [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt)
+  [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/9f5d816f38616c024dbeafb80995c081)
   
   
  ### Sketch 3 - Implementation
