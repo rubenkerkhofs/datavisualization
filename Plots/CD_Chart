@@ -1,0 +1,234 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic pie chart example.",
+  "width": 800,
+  "height": 800,
+  "autosize": "none",
+
+  "signals": [
+    {
+      "name": "startAngle", "value": 0
+    },
+    {
+      "name": "endAngle", "value": 6.29
+    },
+    {
+      "name": "cornerRadius", "value": 0
+    },
+    {
+      "name": "sort", "value": true
+    }
+  ],
+
+  "data": [
+    {
+      "name": "table",
+      "url":"https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/third_sketch.json",
+      "transform": [
+        {
+          "type":"collect",
+          "sort":{"field":"month"}
+        },
+        {
+          "type":"formula",
+          "as":"season_correct",
+          "expr":"if(datum.month == 12 || datum.month == 1 || datum.month == 2, 'Winter', if(datum.month == 3 || datum.month == 4 || datum.month == 5, 'Spring', if(datum.month == 6 || datum.month == 7 || datum.month == 8, 'Summer', if(datum.month == 9 || datum.month == 10 || datum.month == 11, 'Fall', 'No season'))))"
+        },
+        {
+          "type" : "formula",
+          "as": "pie_lengths",
+          "expr": "20/2"
+        },
+        {
+          "type":"formula",
+          "as": "month_string",
+          "expr": "if(datum.month == 1, 'January', if(datum.month == 2, 'February', if(datum.month == 3, 'March', if(datum.month == 4, 'April', if(datum.month == 5, 'May', if(datum.month == 6, 'June', if(datum.month == 7, 'July', if(datum.month == 8, 'August', if(datum.month == 9, 'September', if(datum.month == 10, 'October', if(datum.month == 11, 'November', if(datum.month == 12, 'December', 'inexistent'))))))))))))"
+        },
+        {
+          "type": "filter",
+          "expr":"datum.month != null"
+        },
+        {
+          "type": "pie",
+          "field": "pie_lengths",
+          "startAngle": {"signal": "startAngle"},
+          "endAngle": {"signal": "endAngle"},
+          "sort":{"signal": "sort", "field": "month"}
+        },
+        {
+          "type":"formula",
+          "as":"endAngle_fixed",
+          "expr":"if(datum.month == 12, 6.28, datum.endAngle)"
+        },
+        {
+          "type":"formula",
+          "as": "first_tooltip",
+          "expr":"'Edm: '+toString(datum.count_edm) + '\\n' + 'Latin: ' + toString(datum.count_latin) + '\\n' + 'Pop: ' + toString(datum.count_pop) + '\\n'+ 'R&B: ' + toString(datum.count_randb) + '\\n' + 'Rap: ' + toString(datum.count_rap) + '\\n' + 'Rock: ' + toString(datum.count_rock) + '\\n'+ 'Total: ' + toString(datum.count)"
+        },
+        {
+          "type":"formula",
+          "as": "second_tooltip",
+          "expr":"'Edm: '+ toString(datum.track_popularity_edm) + '\\n' + 'Latin: ' + toString(datum.track_popularity_latin) + '\\n' + 'Pop: ' + toString(datum.track_popularity_pop) + '\\n'+ 'R&B: ' + toString(datum.track_popularity_randb) + '\\n' + 'Rap: ' + toString(datum.track_popularity_rap) + '\\n' + 'Rock: ' + toString(datum.track_popularity_rock) + '\\n'+ 'Total: ' + toString(datum.track_popularity)"
+        },
+        {
+         "type":"formula",
+         "as": "third_tooltip",
+         "expr":"'Edm: '+ toString(datum.danceability_edm) + '\\n' + 'Latin: ' + toString(datum.danceability_latin) + '\\n' + 'Pop: ' + toString(datum.danceability_pop) + '\\n'+ 'R&B: ' + toString(datum.danceability_randb) + '\\n' + 'Rap: ' + toString(datum.danceability_rap) + '\\n' + 'Rock: ' + toString(datum.danceability_rock) + '\\n'+ 'Total: ' + toString(datum.danceability)"
+        },
+        {
+          "type":"formula",
+          "as": "fourth_tooltip",
+          "expr":"'Edm: '+ toString(datum.instrumentalness_edm) + '\\n' + 'Latin: ' + toString(datum.instrumentalness_latin) + '\\n' + 'Pop: ' + toString(datum.instrumentalness_pop) + '\\n'+ 'R&B: ' + toString(datum.instrumentalness_randb) + '\\n' + 'Rap: ' + toString(datum.instrumentalness_rap) + '\\n' + 'Rock: ' + toString(datum.instrumentalness_rock) + '\\n'+ 'Total: ' + toString(datum.instrumentalness)"
+        }         
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "month_color",
+      "type": "ordinal",
+      "domain": {"data": "table", "field": "month"},
+      "range": {"scheme": "category20"}
+    },
+      {
+      "name": "align",
+      "type": "ordinal",
+      "domain": ["left", "right", "top", "bottom"],
+      "range": ["right", "left", "center", "center"]
+    },
+    {
+      "name":"count_color",
+      "type": "linear",
+      "domain": {"data":"table", "field":"count"},
+      "range": {"scheme": "blues"}
+    },
+    {
+      "name": "season_scale",
+      "type":"ordinal",
+      "domain":{"data":"table", "field":"season_correct"},
+      "range":{"scheme":"tableau20"}
+    },
+    {
+      "name": "popularity_scale",
+      "type":"linear",
+      "domain":{"data":"table", "field":"track_popularity"},
+      "range":{"scheme": "greens"}
+    },
+    {
+      "name": "danceability_scale",
+      "type":"linear",
+      "domain":{"data":"table", "field":"danceability"},
+      "range":{"scheme": "reds"}
+    },
+    {
+      "name": "instrumentalness_scale",
+      "type":"linear",
+      "domain":{"data":"table", "field":"instrumentalness"},
+      "range":{"scheme": "greys"}
+    }
+  ],
+  "legends": [
+    {"fill": "season_scale",
+    "orient": "top-right",
+    "title":"Season"},
+    {"fill": "popularity_scale",
+    "orient":"top-left",
+    "title":"Popularity"},
+    {"fill": "danceability_scale",
+    "orient":"bottom-left",
+    "title": "Danceability"},
+    {"fill": "instrumentalness_scale",
+    "orient":"bottom-right",
+    "title": "Danceability"}
+  ],
+
+  "marks": [
+    {
+      "type": "arc",
+      "from": {"data": "table"},
+      "encode": {
+        "enter": {
+          "startAngle":{"field":"startAngle"},
+          "endAngle":{"field": "endAngle_fixed"},
+          "outerRadius": {"value":160},
+          "fill":{"scale":"season_scale", "field": "season_correct"},
+          "innerRadius":{"value":20},
+          "x": {"signal": "width / 2"},
+          "y": {"signal": "height / 2"},
+          "tooltip": {"field": "first_tooltip"}
+        },
+        "update": {
+          "cornerRadius": {"signal": "cornerRadius"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data":"table"},
+      "encode": {
+        "enter":{
+          "x": {"field": {"group": "width"}, "mult": 0.48},
+          "y": {"field": {"group": "height"}, "mult": 0.5},
+          "theta": {"signal": "(datum.startAngle + datum.endAngle)/2.03"},
+          "text":{"field":"month_string"},
+          "radius":{"value":130}
+        }
+      }
+    },
+    {"type": "arc",
+    "from":{"data":"table"},
+    "encode":{
+      "enter":{
+        "fill":{"scale":"popularity_scale", "field":"track_popularity", "type":"linear"},
+        "startAngle":{"field":"startAngle"},
+        "endAngle":{"field":"endAngle_fixed"},
+        "innerRadius":{"value":160},
+        "outerRadius":{"value":180},
+        "x": {"signal": "width / 2"},
+        "y": {"signal": "height / 2"},
+        "tooltip":{"field":"second_tooltip"}
+      },
+      "update":{
+        "field":"second_tooltip"
+      }
+    }
+   },
+   {"type": "arc",
+   "from":{"data":"table"},
+   "encode":{
+     "enter":{
+       "fill":{"scale": "danceability_scale", "field":"danceability"},
+       "startAngle":{"field":"startAngle"},
+       "endAngle":{"field":"endAngle_fixed"},
+       "outerRadius":{"value":200},
+       "innerRadius":{"value":180},
+      "x": {"signal": "width / 2"},
+      "y": {"signal": "height / 2"},
+      "tooltip": {"field": "third_tooltip"}
+     },
+     "update":{
+       "field":"third_tooltip" 
+     }
+   }
+   },
+   {"type": "arc",
+   "from":{"data":"table"},
+   "encode":{
+     "enter":{
+       "fill":{"scale": "instrumentalness_scale", "field":"instrumentalness"},
+       "startAngle":{"field":"startAngle"},
+       "endAngle":{"field":"endAngle_fixed"},
+       "outerRadius":{"value":220},
+       "innerRadius":{"value":200},
+      "x": {"signal": "width / 2"},
+      "y": {"signal": "height / 2"},
+      "tooltip": {"field": "fourth_tooltip"}
+     },
+     "update":{
+       "field":"fourth_tooltip" 
+     }
+   }
+   }
+  ]
+}
