@@ -64,4 +64,4 @@ The different sketches shown above have been implemented using vega or vega lite
   
   
  ### Sketch 3 - Implementation
- TBA
+ [CD plot](https://github.com/rubenkerkhofs/datavisualization/blob/master/Plots/CD%20chart/plot.PNG?raw=true) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/CD%20chart/CD_Chart) - [gist](https://gist.github.com/rubenkerkhofs/c8959d7e496cda6903c6c89bdbd26050)
