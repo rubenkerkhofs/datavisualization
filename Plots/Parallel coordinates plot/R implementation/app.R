@@ -112,7 +112,7 @@ server <- function(input, output) {
         ggparcoord(characteristics,
                    columns = 3:12, groupColumn = 1, order = "anyClass",
                    showPoints = TRUE, 
-                   title = "Parallel Coordinate Plot for the Iris Data",
+                   title = "Parallel Coordinate Plot",
                    alphaLines = max(1 - (groups/6), 0.5),
                    scale = "uniminmax"
         ) + 
