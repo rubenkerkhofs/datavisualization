@@ -1,36 +1,735 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "data": {"url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20addition/danceability_per_season.json"},
-  "vconcat": [
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "padding": 5,
+  "data": [
     {
-      "title": "Danceability",
-      "mark": {"type": "rect", "tooltip": true},
-      "encoding": {
-        "y": {"field": "season", "type": "nominal"},
-        "x": {"field": "track_album_release_year", "type": "ordinal",
-        "axis" : {"title" : "Year"}},
-        "color": {"field": "Danceability", "type": "quantitative"}
+      "name": "data",
+      "url": "https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Data/Sketch%202%20-%20addition/danceability_per_season.json"
+    }
+  ],
+
+    "signals": [
+    {"name": "x_step", "value": 13},
+    {"name": "width", "update": "bandspace(domain('x').length, 0, 0) * x_step"},
+    {"name": "y_step", "value": 13},
+    {"name": "height", "update": "bandspace(domain('y').length, 0, 0) * y_step"}
+  ],
+
+
+
+
+
+
+
+  "scales": [
+        {
+      "name": "x",
+      "type": "band",
+      "domain": {"data": "data", "field": "track_album_release_year", "sort": true},
+      "range": {"step": {"signal": "x_step"}},
+      "paddingInner": 0,
+      "paddingOuter": 0
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": {"data": "data", "field": "season", "sort": true},
+      "range": {"step": {"signal": "y_step"}},
+      "paddingInner": 0,
+      "paddingOuter": 0
+    },
+    {
+      "name": "colorDanceability",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Danceability"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorEnergy",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Energy"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorKey",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Key"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorLoudness",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Loudness"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorMode",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Mode"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorSpeechiness",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Speechiness"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorAcousticness",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Acousticness"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorInstrumentalness",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Instrumentalness"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorLiveness",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Liveness"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorValence",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Valence"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorTempo",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Tempo"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    },
+    {
+      "name": "colorDuration",
+      "type": "linear",
+      "domain": {"data": "data", "field": "Duration"},
+      "range": "heatmap",
+      "interpolate": "hcl",
+      "zero": false
+    }
+  ],
+
+
+
+
+
+
+
+
+
+
+
+  "layout": {"padding": 25, "columns": 1},
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
       },
-      "config": {
-        "axis": {"grid": true, "tickBand": "extent"}
-  }
+      "title": "Danceability",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorDanceability", "field": "Danceability"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Danceability"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorDanceability",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Danceability"
+            }
+          ]
     },
 
 
 
     {
-      "title": "Energy",
-      "mark": {"type": "rect", "tooltip": true},
-      "encoding": {
-        "y": {"field": "season", "type": "nominal"},
-        "x": {"field": "track_album_release_year", "type": "ordinal",
-        "axis" : {"title" : "Year"}},
-        "color": {"field": "Energy", "type": "quantitative"}
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
       },
-      "config": {
-        "axis": {"grid": true, "tickBand": "extent"}
-      }  
-    }
+      "title": "Energy",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorEnergy", "field": "Energy"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Energy"}
+            }
+          }
+        }
+      ],
 
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorEnergy",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Energy"
+            }
+          ]
+    },
+
+
+
+
+
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Key",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorKey", "field": "Key"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Key"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorKey",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Key"
+            }
+          ]
+    },
+
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Loudness",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorLoudness", "field": "Loudness"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Loudness"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorLoudness",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Loudness"
+            }
+          ]
+    },
+
+
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Acousticness",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorAcousticness", "field": "Acousticness"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Acousticness"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorAcousticness",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Acousticness"
+            }
+          ]
+    },
+
+
+
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Liveness",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorLiveness", "field": "Liveness"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Liveness"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorLiveness",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Liveness"
+            }
+          ]
+    },
+
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Valence",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorValence", "field": "Valence"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Valence"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorValence",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Valence"
+            }
+          ]
+    },
+
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Tempo",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorTempo", "field": "Tempo"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Tempo"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorTempo",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Tempo"
+            }
+          ]
+    },
+
+
+
+        {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 675},
+          "height": {"value": 50}
+        }
+      },
+      "title": "Duaration",
+      
+      "marks": [
+        {
+          "name": "marks",
+          "type": "rect",
+          "style": ["rect"],
+          "from": {"data": "data"},
+          "encode": {
+            "update": {
+              "fill": {"scale": "colorDuration", "field": "Duration"},
+              "x": {"scale": "x", "field": "track_album_release_year"},
+              "width": {"scale": "x", "band": 1},
+              "y": {"scale": "y", "field": "season"},
+              "height": {"scale": "y", "band": 1},
+              "tooltip": {"field": "Duration"}
+            }
+          }
+        }
+      ],
+
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Year",
+          "labelAngle": 0,
+          "labelBaseline": "top",
+          "labelOverlap": true,
+          "zindex": 1
+        },
+
+        {
+          "scale": "y",
+          "orient": "left",
+          "grid": false,
+          "title": "Season",
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ],
+
+
+      "legends": [
+            {
+              "fill": "colorDuration",
+              "gradientLength": {"signal": "clamp(height, 64, 200)"},
+              "symbolType": "square",
+              "title": "Duration"
+            }
+          ]
+    }
   ]
-}
+}  
