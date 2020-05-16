@@ -60,7 +60,7 @@ The different sketches shown above have been implemented using vega or vega lite
   
   ### Sketch 2 - additional implementation
   
-  [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/plot.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/9f5d816f38616c024dbeafb80995c081)
+  [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/Implementation.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/9f5d816f38616c024dbeafb80995c081)
   
   
  ### Sketch 3 - Implementation
