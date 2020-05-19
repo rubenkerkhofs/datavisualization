@@ -6,6 +6,7 @@
   "width": 800,
   "height": 400,
   "style": "cell",
+  "title": "Parallel coordinates plot song characteristics",
   "data": [
     {"name": "decade_store"},
     {
@@ -214,11 +215,7 @@
           "from": {"data": "faceted_path_layer_1_main"},
           "encode": {
             "update": {
-              "stroke":  [{
-                  "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
-                  "value": "#51a0d5"
-                },
-                {"value": "#51a0d5"}],
+              "stroke": {"scale": "color", "field": "decade"},
               "opacity": [
                 {
                   "test": "(Decade == datum.decade | Decade == datum.All_dec) && (Genre == datum.playlist_genre | Genre == datum.All_gen)",
@@ -364,7 +361,7 @@
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "source_0", "field": "decade", "sort": true},
-      "range": {"scheme": "blues"}
+      "range": {"scheme": "yelloworangered"}
     }
   ],
   "axes": [
@@ -375,5 +372,6 @@
       "labelBaseline": "top",
       "zindex": 1
     }
-  ]
+  ],
+  "legends": [{"fill": "color"}]
 }

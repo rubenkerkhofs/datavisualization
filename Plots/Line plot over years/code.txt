@@ -18,7 +18,7 @@
   "encoding": {
     "x": {"field": "x", "type": "temporal", "axis" : {"title" : "Year"}},
     "y": {"field": "y", "type": "quantitative", "axis" : {"title" : "Standardized value"}},
-    "color": {"field": "c", "type": "nominal", "legend": {"title" : "Characteristics"}},
+    "color": {"field": "c", "type": "nominal", "legend": {"title" : "Characteristics", "orient" : "left"}},
     "opacity": {
       "condition": {"selection": "Characteristic", "value": 1},
       "value": 0.1
