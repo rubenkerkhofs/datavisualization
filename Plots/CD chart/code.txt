@@ -120,7 +120,7 @@
       "name": "speechiness_scale",
       "type": "linear",
       "domain": {"data": "table", "field": "speechiness"},
-      "range": {"scheme": "goldorange"}
+      "range": {"scheme": "purpleblue"}
     },
     {
       "name": "key_scale",
