@@ -59,7 +59,7 @@ The different sketches shown above have been implemented using vega or vega lite
  
  [Line plot over months implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/465ab4c5dd873f3bb7752a03d096618f)
  
- [Final implementation sketch 2](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/plot.PNG)
+ [Final implementation sketch 2](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/Final%20implementation.PNG)
  
   
   ### Sketch 2 - additional implementation
