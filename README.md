@@ -50,6 +50,8 @@ The different sketches shown above have been implemented using vega or vega lite
 
 [Parallel coordinates plot implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/Parallel%20coordinates%20plot%20-%20vega.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/code-vega.txt) - [gist](https://gist.github.com/rubenkerkhofs/4d1b8337ea0fe31ca0f5407654918321)
 
+[Final implementation sketch 1](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Parallel%20coordinates%20plot/Final%20implementation.PNG)
+
   
  ### Sketch 2 - Implementation
  
@@ -57,10 +59,14 @@ The different sketches shown above have been implemented using vega or vega lite
  
  [Line plot over months implementation](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/plot%20after%20editing.jpeg) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Lineplot%20over%20months/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/465ab4c5dd873f3bb7752a03d096618f)
  
+ [Final implementation sketch 2](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Line%20plot%20over%20years/plot.PNG)
+ 
   
   ### Sketch 2 - additional implementation
   
   [Github style plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/Implementation.PNG) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/9f5d816f38616c024dbeafb80995c081)
+  
+  [Final implementation additional plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/Additional%20plot%20-%20github%20style/Implementation.PNG)
   
   
  ### Sketch 3 - Implementation
