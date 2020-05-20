@@ -73,4 +73,4 @@ The different sketches shown above have been implemented using vega or vega lite
  [CD plot](https://github.com/rubenkerkhofs/datavisualization/blob/master/Plots/CD%20chart/plot.PNG?raw=true) - [code](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/CD%20chart/code.txt) - [gist](https://gist.github.com/rubenkerkhofs/c8959d7e496cda6903c6c89bdbd26050)
  
   
-  [Final implementation additional plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/CD%20chart/Implementation.PNG)
+  [Final implementation CD plot](https://raw.githubusercontent.com/rubenkerkhofs/datavisualization/master/Plots/CD%20chart/Implementation.PNG)
